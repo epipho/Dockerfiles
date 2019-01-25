@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  cli:
+    build: ./client
+    env_file:
+      - dev.env    
+  controller_db:
+    image: mariadb:10.3
+    env_file:
+      - dev.env
+    volumes:
+      - .data/controller_db:/var/lib/mysql
+  keystone:
+    build: ./keystone
+    env_file:
+      - dev.env
+    environment:
+      - KEYSTONE_DB_PASSWORD=keystonepassword
+    ports:
+      - 5000:5000
+     
