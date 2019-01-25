@@ -10,4 +10,4 @@ RUN apk update \
 EXPOSE 8080
 VOLUME ["/data"]
 
-ENTRYPOINT ["/usr/bin/pypi-server", "--port", "8080", "--passwords", ".", "--authenticate", ".", "/data"]
+ENTRYPOINT ["/usr/bin/pypi-server", "--port", "8080", "--passwords", ".", "--authenticate", ".", "--overwrite",  "/data"]
