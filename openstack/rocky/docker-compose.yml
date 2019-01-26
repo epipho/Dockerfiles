@@ -2,6 +2,7 @@ version: '3'
 
 services:
   cli:
+    image: rocky-base
     build: ./client
     env_file:
       - dev.env    
@@ -19,4 +20,17 @@ services:
       - KEYSTONE_DB_PASSWORD=keystonepassword
     ports:
       - 5000:5000
+    hostname: keystone
+  glance-api:
+    build: ./glance
+    env_file:
+      - dev.env
+    environment:
+      - GLANCE_DB_PASSWORD=glancepassword
+      - GLANCE_USER=glance
+      - GLANCE_PASSWORD=glance
+    volumes:
+      - .data/glance:/data
+    hostname: glance
+      
      

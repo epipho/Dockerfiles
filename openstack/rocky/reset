@@ -1,0 +1,4 @@
+#! /bin/bash
+
+./down -v
+rm -rf .data

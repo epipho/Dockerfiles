@@ -9,13 +9,13 @@ RUN apt-get update \
  && apt-get update \
  && apt-get -y --no-install-recommends install python-openstackclient 
 
-RUN apt-get -y --no-install-recommends install keystone
-
-ADD keystone.conf /etc/keystone/keystone.conf
-
+RUN apt-get -y --no-install-recommends install glance gettext
+ 
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod a+x /docker-entrypoint.sh
 
-EXPOSE 5000
+ADD glance-api.conf /glance-api.template
+
+EXPOSE 9292
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

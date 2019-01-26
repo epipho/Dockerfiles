@@ -4,8 +4,9 @@ MAINTAINER Evan Pipho <evan@10000coins.com>
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
- && apt-get -y --no-install-recommends install build-essential python-dev python-setuptools python-pip \
- && pip install wheel \
- && pip install python-openstackclient
+ && apt-get -y --no-install-recommends install software-properties-common mysql-client \
+ && add-apt-repository cloud-archive:rocky \
+ && apt-get update \
+ && apt-get -y --no-install-recommends install python-openstackclient 
 
-ENTRYPOINT ["sleep", "99999999999999999"]
+ENTRYPOINT ["sleep", "99999999999999999"]f
