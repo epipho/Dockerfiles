@@ -41,8 +41,8 @@ if [ ! -f  ${BOOTSTRAP_FILE} ]; then
     openstack endpoint create --region ${OS_REGION} image public http://${HOSTNAME}:9292
     openstack endpoint create --region ${OS_REGION} image admin http://${HOSTNAME}:9292
     openstack endpoint create --region ${OS_REGION} image internal http://${HOSTNAME}:9292
-    
+
     touch ${BOOTSTRAP_FILE}    
 fi
 
-exec /usr/bin/supervisord
+exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

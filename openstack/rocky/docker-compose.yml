@@ -14,7 +14,12 @@ services:
     image: rocky-base
     build: ./client
     env_file:
-      - dev.env    
+      - dev.env
+  rabbitmq:
+    image: rabbitmq:3.7
+    env_file:
+      - dev.env
+    hostname: rabbitmq
   keystone:
     build: ./keystone
     env_file:
@@ -42,5 +47,17 @@ services:
     hostname: horizon
     ports:
       - 8080:80
-      
-     
+  nova-controller:
+    build: ./nova-controller
+    env_file:
+      - dev.env
+    environment:
+      - NOVA_DB_PASSWORD=novapassword
+      - PLACEMENT_DB_PASSWORD=placementpassword
+      - NOVA_USER=nova
+      - NOVA_PASSWORD=nova
+      - PLACEMENT_USER=placement
+      - PLACEMENT_PASSWORD=placement
+    hostname: nova-controller
+    volumes:
+      - .data/nova:/data
