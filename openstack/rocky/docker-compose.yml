@@ -1,17 +1,20 @@
 version: '3'
 
 services:
-  cli:
-    image: rocky-base
-    build: ./client
-    env_file:
-      - dev.env    
   controller_db:
     image: mariadb:10.3
     env_file:
       - dev.env
     volumes:
       - .data/controller_db:/var/lib/mysql
+  memcached:
+    image: memcached:1.5-alpine
+    hostname: memcached
+  cli:
+    image: rocky-base
+    build: ./client
+    env_file:
+      - dev.env    
   keystone:
     build: ./keystone
     env_file:
@@ -21,7 +24,7 @@ services:
     ports:
       - 5000:5000
     hostname: keystone
-  glance-api:
+  glance:
     build: ./glance
     env_file:
       - dev.env
@@ -32,5 +35,12 @@ services:
     volumes:
       - .data/glance:/data
     hostname: glance
+  horizon:
+    build: ./horizon
+    env_file:
+      - dev.env
+    hostname: horizon
+    ports:
+      - 8080:80
       
      

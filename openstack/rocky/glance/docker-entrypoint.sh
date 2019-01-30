@@ -45,4 +45,4 @@ if [ ! -f  ${BOOTSTRAP_FILE} ]; then
     touch ${BOOTSTRAP_FILE}    
 fi
 
-exec glance-api
+exec /usr/bin/supervisord

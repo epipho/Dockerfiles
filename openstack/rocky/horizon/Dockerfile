@@ -9,14 +9,14 @@ RUN apt-get update \
  && apt-get update \
  && apt-get -y --no-install-recommends install python-openstackclient 
 
-RUN apt-get -y --no-install-recommends install supervisor glance gettext
-
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN apt-get -y --no-install-recommends install openstack-dashboard
+ 
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod a+x /docker-entrypoint.sh
 
-ADD glance-api.conf /glance-api.template
+ADD local_settings.py /etc/openstack-dashboard/local_settings.py
+RUN chmod a+r /etc/openstack-dashboard/local_settings.py
 
-EXPOSE 9292
+EXPOSE 80
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
