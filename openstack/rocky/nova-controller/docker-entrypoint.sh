@@ -39,7 +39,7 @@ nova-manage api_db sync
 nova-manage cell_v2 map_cell0
 nova-manage db sync
 
-BOOTSTRAP_FILE=/data/.bootstrappedm
+BOOTSTRAP_FILE=/var/lib/nova/.bootstrapped
 
 if [ ! -f  ${BOOTSTRAP_FILE} ]; then
     # Wait for keystone

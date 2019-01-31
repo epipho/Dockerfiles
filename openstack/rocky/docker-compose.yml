@@ -67,7 +67,7 @@ services:
       - PLACEMENT_PASSWORD=placement
     hostname: nova-controller
     volumes:
-      - .data/nova:/data
+      - .data/nova:/var/lib/nova
     restart: on-failure
   nova-compute:
     build: ./nova-compute
@@ -78,5 +78,7 @@ services:
       - NOVA_PASSWORD=nova
       - PLACEMENT_USER=placement
       - PLACEMENT_PASSWORD=placement
+    volumes:
+      - .data/nova-compute:/var/lib/nova
     privileged: true
     restart: on-failure
