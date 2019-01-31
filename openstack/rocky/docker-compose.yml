@@ -7,19 +7,23 @@ services:
       - dev.env
     volumes:
       - .data/controller_db:/var/lib/mysql
+    restart: on-failure
   memcached:
     image: memcached:1.5-alpine
     hostname: memcached
+    restart: on-failure
   cli:
     image: rocky-base
     build: ./client
     env_file:
       - dev.env
+    restart: on-failure
   rabbitmq:
     image: rabbitmq:3.7
     env_file:
       - dev.env
     hostname: rabbitmq
+    restart: on-failure
   keystone:
     build: ./keystone
     env_file:
@@ -29,6 +33,7 @@ services:
     ports:
       - 5000:5000
     hostname: keystone
+    restart: on-failure
   glance:
     build: ./glance
     env_file:
@@ -40,6 +45,7 @@ services:
     volumes:
       - .data/glance:/data
     hostname: glance
+    restart: on-failure
   horizon:
     build: ./horizon
     env_file:
@@ -47,6 +53,7 @@ services:
     hostname: horizon
     ports:
       - 8080:80
+    restart: on-failure
   nova-controller:
     build: ./nova-controller
     env_file:
@@ -61,3 +68,15 @@ services:
     hostname: nova-controller
     volumes:
       - .data/nova:/data
+    restart: on-failure
+  nova-compute:
+    build: ./nova-compute
+    env_file:
+      - dev.env
+    environment:
+      - NOVA_USER=nova
+      - NOVA_PASSWORD=nova
+      - PLACEMENT_USER=placement
+      - PLACEMENT_PASSWORD=placement
+    privileged: true
+    restart: on-failure

@@ -9,7 +9,7 @@ RUN apt-get update \
  && apt-get update \
  && apt-get -y --no-install-recommends install python-openstackclient 
 
-RUN apt-get -y --no-install-recommends install supervisor gettext nova-api nova-conductor nova-scheduler nova-placement-api
+RUN apt-get -y --no-install-recommends install supervisor gettext nova-compute
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD docker-entrypoint.sh /docker-entrypoint.sh
