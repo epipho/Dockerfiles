@@ -32,6 +32,9 @@ export NOVA_CONN
 export API_CONN
 export PLACEMENT_CONN
 
+MY_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+export MY_IP
+
 envsubst < /nova.template > /etc/nova/nova.conf
 
 # update databases

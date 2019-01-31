@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
   controller_db:
@@ -8,22 +8,30 @@ services:
     volumes:
       - .data/controller_db:/var/lib/mysql
     restart: on-failure
+    networks:
+      - management
   memcached:
     image: memcached:1.5-alpine
     hostname: memcached
     restart: on-failure
+    networks:
+      - management
   cli:
     image: rocky-base
     build: ./client
     env_file:
       - dev.env
     restart: on-failure
+    networks:
+      - management
   rabbitmq:
     image: rabbitmq:3.7
     env_file:
       - dev.env
     hostname: rabbitmq
     restart: on-failure
+    networks:
+      - management
   keystone:
     build: ./keystone
     env_file:
@@ -34,6 +42,8 @@ services:
       - 5000:5000
     hostname: keystone
     restart: on-failure
+    networks:
+      - management
   glance:
     build: ./glance
     env_file:
@@ -46,6 +56,8 @@ services:
       - .data/glance:/data
     hostname: glance
     restart: on-failure
+    networks:
+      - management
   horizon:
     build: ./horizon
     env_file:
@@ -54,6 +66,8 @@ services:
     ports:
       - 8080:80
     restart: on-failure
+    networks:
+      - management
   nova-controller:
     build: ./nova-controller
     env_file:
@@ -61,24 +75,38 @@ services:
     environment:
       - NOVA_DB_PASSWORD=novapassword
       - PLACEMENT_DB_PASSWORD=placementpassword
-      - NOVA_USER=nova
-      - NOVA_PASSWORD=nova
-      - PLACEMENT_USER=placement
-      - PLACEMENT_PASSWORD=placement
     hostname: nova-controller
     volumes:
       - .data/nova:/var/lib/nova
     restart: on-failure
+    networks:
+      - management
+      - provider
   nova-compute:
     build: ./nova-compute
     env_file:
       - dev.env
-    environment:
-      - NOVA_USER=nova
-      - NOVA_PASSWORD=nova
-      - PLACEMENT_USER=placement
-      - PLACEMENT_PASSWORD=placement
     volumes:
       - .data/nova-compute:/var/lib/nova
     privileged: true
     restart: on-failure
+    networks:
+      - management
+      - provider
+  neutron:
+    build: ./neutron
+    env_file:
+      - dev.env
+    environment:
+      - NEUTRON_DB_PASSWORD=neutronpassword
+    volumes:
+      - .data/neutron:/var/lib/neutron
+    privileged: true
+    hostname: neutron
+    restart: on-failure
+    networks:
+      - management
+      - provider
+networks:
+  management:
+  provider:
