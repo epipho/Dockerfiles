@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  master:
+    image: jenkins/jenkins:lts
+    volumes:
+      - .data/master/jenkins_home:/var/jenkins_home
+    ports:
+      - 8000:8080
+      - 50000:50000
+    hostname: jenkins_master
+  
