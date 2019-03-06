@@ -1,0 +1,5 @@
+ organization = Local libvirt testing
+ cn = localhost
+ tls_www_client
+ encryption_key
+ signing_key

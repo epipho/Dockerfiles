@@ -1,0 +1,4 @@
+cn = Local libvirtd testing
+ca
+cert_signing_key
+expiration_days = 3650

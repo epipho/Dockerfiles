@@ -1,0 +1,8 @@
+version: '3.5'
+
+services:
+  libvirt:
+    build: .
+    restart: on-failure
+    privileged: true
+    hostname: libvirt
