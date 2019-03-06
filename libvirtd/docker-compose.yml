@@ -8,6 +8,8 @@ services:
     restart: on-failure
     privileged: true
     hostname: libvirt
+    ports:
+      - 16514:16514
   virsh:
     build:
       context: .

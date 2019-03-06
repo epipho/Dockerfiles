@@ -7,11 +7,11 @@ RUN apt-get update \
  && apt-get -y --no-install-recommends install libvirt-daemon-system qemu supervisor iptables ebtables iproute2 dmidecode dnsmasq
 
 # add ca-cert for TLS
-ADD certs/ca_cert.pem /etc/pki/CA/cacert.pem
+ADD certs/cacert.pem /etc/pki/CA/cacert.pem
 
 # add server key and cert
-ADD certs/server_cert.pem /etc/pki/libvirt/servercert.pem
-ADD certs/server_key.pem /etc/pki/libvirt/private/serverkey.pem
+ADD certs/servercert.pem /etc/pki/libvirt/servercert.pem
+ADD certs/serverkey.pem /etc/pki/libvirt/private/serverkey.pem
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 

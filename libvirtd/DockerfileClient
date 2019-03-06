@@ -7,10 +7,10 @@ RUN apt-get update \
  && apt-get -y --no-install-recommends install libvirt-bin
  
 # add ca-cert for TLS
-ADD certs/ca_cert.pem /etc/pki/CA/cacert.pem
+ADD certs/cacert.pem /etc/pki/CA/cacert.pem
 
 # add client key and cert
-ADD certs/client_cert.pem /etc/pki/libvirt/clientcert.pem
-ADD certs/client_key.pem /etc/pki/libvirt/private/clientkey.pem
+ADD certs/clientcert.pem /etc/pki/libvirt/clientcert.pem
+ADD certs/clientkey.pem /etc/pki/libvirt/private/clientkey.pem
 
 ENTRYPOINT ["sleep", "99999999999999"]
