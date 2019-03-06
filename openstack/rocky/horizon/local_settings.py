@@ -14,13 +14,13 @@ DEBUG = False
 # This setting controls whether or not compression is enabled. Disabling
 # compression makes Horizon considerably slower, but makes it much easier
 # to debug JS and CSS changes
-#COMPRESS_ENABLED = not DEBUG
+#COMPRESS_ENABLED = True
 
 # This setting controls whether compression happens on the fly, or offline
 # with `python manage.py compress`
 # See https://django-compressor.readthedocs.io/en/latest/usage/#offline-compression
 # for more information
-#COMPRESS_OFFLINE = not DEBUG
+#COMPRESS_OFFLINE = False
 
 # WEBROOT is the location relative to Webserver root
 # should end with a slash.
@@ -819,8 +819,6 @@ WEBROOT='/'
 # see https://docs.djangoproject.com/en/dev/ref/settings/.
 ALLOWED_HOSTS = '*'
 
-# Compress all assets offline as part of packaging installation
-COMPRESS_OFFLINE = True
 
 # DISALLOW_IFRAME_EMBED can be used to prevent Horizon from being embedded
 # within an iframe. Legacy browsers are still vulnerable to a Cross-Frame
@@ -840,17 +838,16 @@ COMPRESS_OFFLINE = True
 # mask_targets is arrangement for appointing a target to mask.
 # method_targets is arrangement of HTTP method to output log.
 # format is the log contents.
-#OPERATION_LOG_ENABLED = False
-#OPERATION_LOG_OPTIONS = {
-#    'mask_fields': ['password'],
-#    'target_methods': ['POST'],
-#    'ignored_urls': ['/js/', '/static/', '^/api/'],
-#    'format': ("[%(client_ip)s] [%(domain_name)s]"
-#        " [%(domain_id)s] [%(project_name)s]"
-#        " [%(project_id)s] [%(user_name)s] [%(user_id)s] [%(request_scheme)s]"
-#        " [%(referer_url)s] [%(request_url)s] [%(message)s] [%(method)s]"
-#        " [%(http_status)s] [%(param)s]"),
-#}
+OPERATION_LOG_ENABLED = True
+OPERATION_LOG_OPTIONS = {
+    'mask_fields': ['password'],
+    'target_methods': ['POST'],
+    'format': ("[%(client_ip)s] [%(domain_name)s]"
+        " [%(domain_id)s] [%(project_name)s]"
+        " [%(project_id)s] [%(user_name)s] [%(user_id)s] [%(request_scheme)s]"
+        " [%(referer_url)s] [%(request_url)s] [%(message)s] [%(method)s]"
+        " [%(http_status)s] [%(param)s]"),
+}
 
 # The default date range in the Overview panel meters - either <today> minus N
 # days (if the value is integer N), or from the beginning of the current month

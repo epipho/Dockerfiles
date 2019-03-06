@@ -9,14 +9,14 @@ RUN apt-get update \
  && apt-get update \
  && apt-get -y --no-install-recommends install python-openstackclient 
 
-RUN apt-get -y --no-install-recommends install iproute2 supervisor gettext nova-compute
+RUN apt-get update \
+ && apt-get -y --no-install-recommends install iproute2 supervisor gettext nova-compute neutron-linuxbridge-agent
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod a+x /docker-entrypoint.sh
 
 ADD nova.conf /nova.template
-
-EXPOSE 9292
+ADD linuxbridge_agent.ini /linuxbridge_agent.template
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

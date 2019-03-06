@@ -10,6 +10,7 @@ RUN apt-get update \
  && apt-get -y --no-install-recommends install python-openstackclient 
 
 RUN apt-get -y --no-install-recommends install openstack-dashboard
+RUN python /usr/share/openstack-dashboard/manage.py compress
  
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod a+x /docker-entrypoint.sh

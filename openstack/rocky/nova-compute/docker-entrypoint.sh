@@ -7,6 +7,7 @@ export MY_IP
 
 # write config file
 envsubst < /nova.template > /etc/nova/nova.conf
+envsubst < /linuxbridge_agent.template > /etc/neutron/plugins/ml2/linuxbridge_agent.ini
 
 # create state dir
 mkdir -p /var/lib/nova/$HOSTNAME/CA

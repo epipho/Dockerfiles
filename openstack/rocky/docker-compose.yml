@@ -10,6 +10,8 @@ services:
     restart: on-failure
     networks:
       - management
+    command:
+      - "--max_connections=10000"
   memcached:
     image: memcached:1.5-alpine
     hostname: memcached
@@ -90,6 +92,8 @@ services:
       - .data/nova-compute:/var/lib/nova
     privileged: true
     restart: on-failure
+#    sysctls:
+#      - net.bridge.bridge-nf-call-iptables=1
     networks:
       - management
       - provider
@@ -104,6 +108,8 @@ services:
     privileged: true
     hostname: neutron
     restart: on-failure
+#    sysctls:
+#      - net.bridge.bridge-nf-call-iptables=1
     networks:
       - management
       - provider
