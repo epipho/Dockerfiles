@@ -15,6 +15,6 @@ ADD certs/server_key.pem /etc/pki/libvirt/private/serverkey.pem
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-EXPOSE 6910
+EXPOSE 16514
 
 ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

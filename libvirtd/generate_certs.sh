@@ -32,3 +32,4 @@ certtool --generate-certificate \
             --load-ca-certificate certs/ca_cert.pem \
             --load-ca-privkey certs/ca_key.pem \
             --outfile certs/client_cert.pem
+

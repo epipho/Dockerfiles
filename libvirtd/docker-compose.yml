@@ -2,7 +2,16 @@ version: '3.5'
 
 services:
   libvirt:
-    build: .
+    build:
+      context: .
+      dockerfile: DockerfileServer
     restart: on-failure
     privileged: true
     hostname: libvirt
+  virsh:
+    build:
+      context: .
+      dockerfile: DockerfileClient
+    restart: on-failure
+    hostname: virsh
+    
